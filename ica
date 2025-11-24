@@ -1,0 +1,18 @@
+from sklearn.decomposition import FastICA
+from sklearn.datasets import load_wine
+from sklearn.preprocessing import StandardScaler
+
+# Load dataset
+data = load_wine()
+X = data.data
+
+# Standardize
+scaler = StandardScaler()
+X_std = scaler.fit_transform(X)
+
+# ICA with 3 components
+ica = FastICA(n_components=3, random_state=42)
+X_ica = ica.fit_transform(X_std)
+
+print("ICA output shape:", X_ica.shape)
+print("First 5 ICA components:\n", X_ica[:5])
